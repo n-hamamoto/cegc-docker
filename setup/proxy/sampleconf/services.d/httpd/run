@@ -1,0 +1,4 @@
+#!/bin/sh
+#/usr/bin/execlineb -P
+rm /var/run/httpd.pid
+/usr/sbin/httpd -DFOREGROUND
