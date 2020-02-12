@@ -21,7 +21,7 @@ cd cegc-docker/setup
 - php/conf/
 - proxy/conf/
 ```
-なお，./mkconfig配下のスクリプトを利用して，機関のidpで認証するための最低限のサンプルを生成して配置することもできます。[生成方法](./mkconfig)
+なお，mkconfig配下のスクリプトを利用して，機関のidpで認証するための最低限のサンプルを生成して配置することもできます。[生成方法](./mkconfig)
 
 ### 起動
 ```
