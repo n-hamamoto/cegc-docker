@@ -10,13 +10,14 @@ cd cegc-docker/setup
 ./init.sh
 ```
 設定ファイルの編集  
-設定ファイルは以下のディレクトリに格納されています。
+設定ファイルは以下のディレクトリに格納されています。詳細な設定を行いたい場合には，各ファイルを確認いただき，設定してください。
+- php/html/conf/config.php
 - docker-compose.yml
 - mysql/conf/
 - php/conf/
 - proxy/conf/
 
-./mkconfig配下でサンプルを生成して配置することができます。[生成方法](./mkconfig)
+./mkconfig配下で，機関のidpで認証する最低限のサンプルを生成して配置することもできます。[生成方法](./mkconfig)
 
 ```
 docker-compose up -d
@@ -24,5 +25,29 @@ docker-compose up -d
 docker exec -i php bash -c "cd conf && sh ./init.sh"
 ```
 
+## 設定変更について
+設定ファイルを編集いただき，''docker-compose restart''，または，``docker-compose down; docker-compose up -d``を実行してください。
+
+## ログファイルについて
+docker-compose.ymlを確認いただければわかりますが，ログは以下に出力されます。
+
+1. /var/log/message
+ - 各コンテナからのログは，先頭行の以下のラベルで区別されています。
+  - docker/proxy/コンテナID:
+  - docker/php/コンテナID: apache(php)のアクセスログ,エラーログ
+  - docker/mysql/コンテナID:
+1. mysql/log/general.log, mysql/log/slow.log
+ - 設定していればクエリログ，スロークエリログが出ます。
+  - mysql/conf/etc/mysql/conf.d/mysql.cnf
+1. proxy/log/httpd/
+ - ssl_access_log, ssl_error_logにproxyで受けたアクセスログ/エラーログがある。
+1. proxy/log/shibboleth/
+ - shibd.log: conf/etc/shibboleth/shibd.loggerで設定
+ - trancaction.log: 受け渡した属性が出ている。onf/etc/shibboleth/shibd.loggerで設定
+1. proxy/log/shibboleth-www/
+ - native.log: conf/etc/shibboleth/native.loggerで設定したログ
+ 
+### 参考
+1. https://meatwiki.nii.ac.jp/confluence/pages/viewpage.action?pageId=12158187
 ### 謝辞
 docker構成の作成には，[学認クラウドオンデマンド構築サービス](https://cloud.gakunin.jp/ocs/)のMoodleアプリケーションテンプレートを参考にさせていただきました。ご協力いただいた関係者の皆様に感謝申し上げます。
