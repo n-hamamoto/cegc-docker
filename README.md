@@ -8,10 +8,10 @@ cd workdir
 git clone https://github.com/n-hamamoto/cegc-docker.git
 cd cegc-docker/setup
 ./init.sh
-
+```
 ファイル編集
 [サンプル](https://github.com/n-hamamoto/cegc-docker/blob/master/mkconfig/README.md)
-
+```
 docker-compose up -d
 (mysqldが立ち上がるのに時間がかかる)
 docker exec -i php bash -c "cd conf && sh ./init.sh"
