@@ -8,8 +8,6 @@
 Docker及びdocker-composeが利用できるサーバで，以下の手順でインストールを行います。
 ### ダウンロードと設定ファイルの配置
 ```
-mkdir workdir
-cd workdir
 git clone https://github.com/n-hamamoto/cegc-docker.git
 cd cegc-docker/setup
 ./init.sh
