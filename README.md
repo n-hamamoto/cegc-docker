@@ -26,7 +26,7 @@ docker exec -i php bash -c "cd conf && sh ./init.sh"
 ```
 
 ## 設定変更について
-設定ファイルを編集いただき，''docker-compose restart''，または，``docker-compose down; docker-compose up -d``を実行してください。
+設定ファイル(mysql/conf/, php/conf, proxy/conf/)を編集いただき，``docker-compose restart``，または，``docker-compose down; docker-compose up -d``を実行してください。
 
 ## ログファイルについて
 docker-compose.ymlを確認いただければわかりますが，ログは以下に出力されます。
