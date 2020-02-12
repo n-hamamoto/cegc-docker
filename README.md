@@ -29,6 +29,7 @@ docker-compose up -d
 (mysqldが立ち上がるのに時間がかかる)
 ```
 ### DBの初期設定
+DBに初期テーブルを設定します。
 ```
 docker exec -i php bash -c "cd conf && sh ./init.sh"
 ```
