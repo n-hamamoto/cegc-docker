@@ -9,8 +9,9 @@ git clone https://github.com/n-hamamoto/cegc-docker.git
 cd cegc-docker/setup
 ./init.sh
 ```
-ファイル編集[aaa](./mkconfig)
-[./mkconfig配下からサンプルを生成できます。]:(https://github.com/n-hamamoto/cegc-docker/blob/master/mkconfig)
+ファイル編集  
+./mkconfig配下でサンプルを生成して配置することができます。[生成方法](./mkconfig)
+
 ```
 docker-compose up -d
 (mysqldが立ち上がるのに時間がかかる)
