@@ -29,6 +29,7 @@ docker-compose up -d
 ```
 docker exec -i php bash -c "cd conf && sh ./init.sh"
 ```
+サービスのURLにアクセスして，ログインしてみてください。
 
 ## 設定変更について
 設定ファイル(mysql/conf/, php/conf, proxy/conf/)を編集いただき，``docker-compose restart``，または，``docker-compose down; docker-compose up -d``を実行してください。
