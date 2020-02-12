@@ -1,2 +1,4 @@
-#!/usr/bin/execlineb -P
+#!/bin/sh
+#/usr/bin/execlineb -P
+export LD_LIBRARY_PATH=/opt/shibboleth/lib64:${LD_LIBRARY_PATH}
 /usr/sbin/shibd -f -F

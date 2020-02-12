@@ -1,62 +1,61 @@
-<SPConfig xmlns="urn:mace:shibboleth:2.0:native:sp:config"
-    xmlns:conf="urn:mace:shibboleth:2.0:native:sp:config"
-    xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion"
-    xmlns:samlp="urn:oasis:names:tc:SAML:2.0:protocol"    
-    xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata"
+<SPConfig xmlns="urn:mace:shibboleth:3.0:native:sp:config"
+    xmlns:conf="urn:mace:shibboleth:3.0:native:sp:config"
     clockSkew="180">
 
+    <OutOfProcess tranLogFormat="%u|%s|%IDP|%i|%ac|%t|%attr|%n|%b|%E|%S|%SS|%L|%UA|%a" />
+  
     <!--
     By default, in-memory StorageService, ReplayCache, ArtifactMap, and SessionCache
     are used. See example-shibboleth2.xml for samples of explicitly configuring them.
     -->
 
     <!--
-    To customize behavior for specific resources on Apache, and to link vhosts or
-    resources to ApplicationOverride settings below, use web server options/commands.
-    See https://wiki.shibboleth.net/confluence/display/SHIB2/NativeSPConfigurationElements for help.
-    
-    For examples with the RequestMap XML syntax instead, see the example-shibboleth2.xml
-    file, and the https://wiki.shibboleth.net/confluence/display/SHIB2/NativeSPRequestMapHowTo topic.
-    -->
     <RequestMapper type="Native">
       <RequestMap applicationId="default">
-	<Host name="*** YOUR SP NAME ***" authType="shibboleth" requireSession="true"/>
-<!--
-	<Host name="*** YOUR SECOND SP NAME ***" applicationId="cegc" authType="shibboleth" requireSession="true"/>
--->
+        <Host name="*** YOUR SP NAME ***" authType="shibboleth" requireSession="true"/>
+        <Host name="*** YOUR SECOND SP NAME ***" applicationId="cegc" authType="shibboleth" requireSession="true"/>
       </RequestMap>
     </RequestMapper>
+    -->
 
     <!-- The ApplicationDefaults element is where most of Shibboleth's SAML bits are defined. -->
-    <ApplicationDefaults entityID="https://**** YOUR SP NAME ****/shibboleth-sp"
-                         REMOTE_USER="eppn persistent-id targeted-id">
-
+    <ApplicationDefaults entityID="https://*** YOUR SP NAME ***/shibboleth-sp"
+        REMOTE_USER="eppn subject-id pairwise-id persistent-id"
+        cipherSuites="DEFAULT:!EXP:!eNULL:!DES:!IDEA:!SEED:!RC4:!3DES:!kRSA:!SSLv3:!TLSv1:!TLSv1.1">
+<!--
+        cipherSuites="DEFAULT:!EXP:!LOW:!aNULL:!eNULL:!DES:!IDEA:!SEED:!RC4:!3DES:!kRSA:!SSLv2:!SSLv3:!TLSv1:!TLSv1.1">
+-->
         <!--
         Controls session lifetimes, address checks, cookie handling, and the protocol handlers.
-        You MUST supply an effectively unique handlerURL value for each of your applications.
-        The value defaults to /Shibboleth.sso, and should be a relative path, with the SP computing
-        a relative value based on the virtual host. Using handlerSSL="true", the default, will force
-        the protocol to be https. You should also set cookieProps to "https" for SSL-only sites.
-        Note that while we default checkAddress to "false", this has a negative impact on the
-        security of your site. Stealing sessions via cookie theft is much easier with this disabled.
+        Each Application has an effectively unique handlerURL, which defaults to "/Shibboleth.sso"
+        and should be a relative path, with the SP computing the full value based on the virtual
+        host. Using handlerSSL="true" will force the protocol to be https. You should also set
+        cookieProps to "https" for SSL-only sites. Note that while we default checkAddress to
+        "false", this makes an assertion stolen in transit easier for attackers to misuse.
+        -->
+	<!--
+        <Sessions lifetime="28800" timeout="3600" relayState="ss:mem"
+                  checkAddress="false" handlerSSL="false" cookieProps="http">
         -->
         <Sessions lifetime="28800" timeout="3600" relayState="ss:mem"
                   checkAddress="false" handlerSSL="false" cookieProps="https">
 
             <!--
-            Configures SSO for a default IdP. To allow for >1 IdP, remove
+            Configures SSO for a default IdP. To properly allow for >1 IdP, remove
             entityID property and adjust discoveryURL to point to discovery service.
-            (Set discoveryProtocol to "WAYF" for legacy Shibboleth WAYF support.)
             You can also override entityID on /Login query string, or in RequestMap/htaccess.
             -->
             <SSO entityID="https://*** YOUR IDP NAME ***/idp/shibboleth"
                  discoveryProtocol="SAMLDS" discoveryURL="https://ds.example.org/DS/WAYF">
-              SAML2 SAML1
+              SAML2
             </SSO>
 
             <!-- SAML and local-only logout. -->
             <Logout>SAML2 Local</Logout>
-            
+
+            <!-- Administrative logout. -->
+            <LogoutInitiator type="Admin" Location="/Logout/Admin" acl="127.0.0.1 ::1" />
+          
             <!-- Extension service that generates "approximate" metadata based on SP configuration. -->
             <Handler type="MetadataGenerator" Location="/Metadata" signing="false"/>
 
@@ -72,58 +71,61 @@
 
         <!--
         Allows overriding of error template information/filenames. You can
-        also add attributes with values that can be plugged into the templates.
+        also add your own attributes with values that can be plugged into the
+        templates, e.g., helpLocation below.
         -->
         <Errors supportContact="root@localhost"
             helpLocation="/about.html"
             styleSheet="/shibboleth-sp/main.css"/>
-        
+
+        <!-- Example of locally maintained metadata. -->
+        <!-- 
+        <MetadataProvider type="XML" validate="true" path="metadata/idp-metadata.xml"/>
+        -->
+
         <!-- Example of remotely supplied batch of signed metadata. -->
-        <!--  
-        <MetadataProvider type="XML" uri="https://metadata.gakunin.nii.ac.jp/gakunin-metadata.xml?generation=2"
+        <!-- -->
+        <MetadataProvider type="XML" validate="true"
+			  url="https://metadata.gakunin.nii.ac.jp/gakunin-metadata.xml?generation=2"
               backingFilePath="federation-metadata.xml" reloadInterval="7200">
-            <MetadataFilter type="RequireValidUntil" maxValidityInterval="2419200"/>
-            <MetadataFilter type="Signature" certificate="/etc/shibboleth/cert/gakunin-signer-2017.cer"/>
+            <MetadataFilter type="RequireValidUntil" maxValidityInterval="1296000"/>
+            <MetadataFilter type="Signature" certificate="cert/gakunin-signer-2017.cer"/>
             <MetadataFilter type="Whitelist">
-               <Include>https://**** YOUR IDP NAME ****/idp/shibboleth</Include>
+                <Include>https://*** YOUR IDP NAME ***/idp/shibboleth</Include>
             </MetadataFilter>
+        </MetadataProvider>
+        <!-- -->
+
+        <!-- Example of remotely supplied "on-demand" signed metadata. -->
+        <!--
+        <MetadataProvider type="MDQ" validate="true" cacheDirectory="mdq"
+	            baseUrl="http://mdq.federation.org" ignoreTransport="true">
+            <MetadataFilter type="RequireValidUntil" maxValidityInterval="2419200"/>
+            <MetadataFilter type="Signature" certificate="mdqsigner.pem" />
         </MetadataProvider>
         -->
 
-        <!-- Example of locally maintained metadata. -->
-        <!--
-        <MetadataProvider type="XML" file="metadata/partner-metadata.xml"/>
-	-->
-        <!-- -->
-	<MetadataProvider type="XML" file="metadata/idp-metadata.xml"/>
-        <!-- -->
-
         <!-- Map to extract attributes from SAML assertions. -->
         <AttributeExtractor type="XML" validate="true" reloadChanges="false" path="attribute-map.xml"/>
-        
-        <!-- Use a SAML query if no attributes are supplied during SSO. -->
-        <AttributeResolver type="Query" subjectMatch="true"/>
 
         <!-- Default filtering policy for recognized attributes, lets other data pass. -->
         <AttributeFilter type="XML" validate="true" path="attribute-policy.xml"/>
 
-        <!-- Simple file-based resolver for using a single keypair. -->
+        <!-- Simple file-based resolvers for separate signing/encryption keys. 
         <CredentialResolver type="File" key="cert/*** YOUR CERT NAME ***.key" certificate="cert/*** YOUR CERT NAME ***.cer"/>
+	-->
+	<!--
+        <CredentialResolver type="File" use="signing"
+            key="sp-signing-key.pem" certificate="sp-signing-cert.pem"/>
+        <CredentialResolver type="File" use="encryption"
+            key="sp-encrypt-key.pem" certificate="sp-encrypt-cert.pem"/>
+        -->
 
         <!--
-        The default settings can be overridden by creating ApplicationOverride elements (see
-        the https://wiki.shibboleth.net/confluence/display/SHIB2/NativeSPApplicationOverride topic).
-        Resource requests are mapped by web server commands, or the RequestMapper, to an
-        applicationId setting.
-        
-        Example of a second application (for a second vhost) that has a different entityID.
-        Resources on the vhost would map to an applicationId of "admin":
+        <ApplicationOverride id="cegc" entityID="https://*** YOUR SECOND SP NAME ***/shibboleth-sp">
+          <CredentialResolver type="File" key="cert/*** YOUR SECOND CERT NAME ***.key" certificate="cert/*** YOUR SECOND CERT NAME ***.cer"/>
+        </ApplicationOverride>
         -->
-<!--
-        <ApplicationOverride id="cegc" entityID="https://*** SECOND SP NAME IF NEEDED ***/shibboleth-sp">
-          <CredentialResolver type="File" key="cert/*** SECOND CERTIFICATE ***.key" certificate="cert/*** SECOND CERTIFICATE ***.cer"/>
-	</ApplicationOverride>
--->
 
     </ApplicationDefaults>
     
