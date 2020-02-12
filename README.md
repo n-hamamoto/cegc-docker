@@ -9,7 +9,13 @@ git clone https://github.com/n-hamamoto/cegc-docker.git
 cd cegc-docker/setup
 ./init.sh
 ```
-ファイル編集  
+設定ファイルの編集  
+設定ファイルは以下のディレクトリに格納されています。
+- docker-compose.yml
+- mysql/conf/
+- php/conf/
+- proxy/conf/
+
 ./mkconfig配下でサンプルを生成して配置することができます。[生成方法](./mkconfig)
 
 ```
