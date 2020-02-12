@@ -13,7 +13,7 @@ cd cegc-docker/setup
 ./init.sh
 ```
 ### 設定ファイルの編集  
-設定ファイルは``cegc-docker``配下の以下のディレクトリに格納されています。詳細な設定を行いたい場合には，各ファイルを確認いただき，設定してください。
+設定ファイルは``cegc-docker``配下の以下のディレクトリに格納されています。詳細な設定を行いたい場合には，各ファイルをご確認いただき，設定してください。
 - php/html/conf/config.php
 - docker-compose.yml
 - mysql/conf/
