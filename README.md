@@ -14,13 +14,14 @@ cd cegc-docker/setup
 ```
 ### 設定ファイルの編集  
 設定ファイルは``cegc-docker``配下の以下のディレクトリに格納されています。詳細な設定を行いたい場合には，各ファイルをご確認いただき，設定してください。
+```
 - php/html/conf/config.php
 - docker-compose.yml
 - mysql/conf/
 - php/conf/
 - proxy/conf/
-
-./mkconfig配下で，機関のidpで認証する最低限のサンプルを生成して配置することもできます。[生成方法](./mkconfig)
+```
+なお，./mkconfig配下のスクリプトを利用して，機関のidpで認証するための最低限のサンプルを生成して配置することもできます。[生成方法](./mkconfig)
 
 ### 起動
 ```
