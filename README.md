@@ -19,4 +19,4 @@ docker exec -i php bash -c "cd conf && sh ./init.sh"
 ```
 
 ### 謝辞
-docker構成の作成には，[学認クラウドオンデマンド構築サービス]（https://cloud.gakunin.jp/ocs/)のMoodleアプリケーションテンプレートを参考にさせていただきました。ご協力いただいた関係者の皆様に感謝申し上げます。
+docker構成の作成には，[学認クラウドオンデマンド構築サービス](https://cloud.gakunin.jp/ocs/)のMoodleアプリケーションテンプレートを参考にさせていただきました。ご協力いただいた関係者の皆様に感謝申し上げます。
