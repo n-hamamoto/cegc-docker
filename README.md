@@ -9,7 +9,7 @@ git clone https://github.com/n-hamamoto/cegc-docker.git
 cd cegc-docker/setup
 ./init.sh
 ```
-ファイル編集
+ファイル編集[aaa](./mkconfig)
 [./mkconfig配下からサンプルを生成できます。]:(https://github.com/n-hamamoto/cegc-docker/blob/master/mkconfig)
 ```
 docker-compose up -d
