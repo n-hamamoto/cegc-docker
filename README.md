@@ -1,5 +1,5 @@
 # cegc-docker
-本ソフトウエアは，docker/docker-composeを利用して，[情報倫理eラーニング成績確認システム(CEGC)](../cegc)を動作させるためのファイルを提供しています。動作させるためには，以下が必要となります。
+本ソフトウエアは，docker/docker-composeを利用して，[情報倫理eラーニング成績確認システム(CEGC)](https://github.com/n-hamamoto/cegc)を動作させるためのファイルを提供しています。動作させるためには，以下が必要となります。
  - Docker及びdocker-composeが利用できるサーバ
  - SSL証明書
  - IdPと連携して動作するため，本サービスのmetadataを機関のIdPに登録していただく必要があります。
