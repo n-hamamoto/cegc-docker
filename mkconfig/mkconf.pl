@@ -54,6 +54,17 @@ while($l=<IN>){
 }
 close(IN);close(OUT);
 
+open(IN,"shib.conf.skel");
+open(OUT,">shib.conf");
+while($l=<IN>){
+    $l=~s/\*\*+\sYOUR\sSP\sNAME\s\*\*+/${serverfqdn}/;
+    $l=~s/\*\*+\sYOUR\sIDP\sNAME\s\*\*+/${idpdbhost}/;
+    $l=~s/\*\*+\sYOUR\sCERT\sNAME\s\*\*+/${serverfqdn}/g;
+    print OUT $l;
+}
+close(IN);close(OUT);
+
+
 print "SSL証明書を以下に作成してください。\n./cert/${serverfqdn}.key, ./cert/${serverfqdn}.cer\n";
 //print "Shibbolet用のmetadataを以下に作成してください。\n./cert/${serverfqdn}.key, ./cert/${serverfqdn}.cer\n";
 
