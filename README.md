@@ -25,6 +25,7 @@ cd cegc-docker/setup
 
 ### 起動
 ```
+cegc-dockerに移動したのち，
 docker-compose up -d
 (mysqldが立ち上がるのに時間がかかる)
 ```
