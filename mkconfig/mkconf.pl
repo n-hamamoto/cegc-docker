@@ -55,6 +55,6 @@ while($l=<IN>){
 close(IN);close(OUT);
 
 print "SSL証明書を以下に作成してください。\n./cert/${serverfqdn}.key, ./cert/${serverfqdn}.cer\n";
-print "Shibbolet用のmetadataを以下に作成してください。\n./cert/${serverfqdn}.key, ./cert/${serverfqdn}.cer\n";
+//print "Shibbolet用のmetadataを以下に作成してください。\n./cert/${serverfqdn}.key, ./cert/${serverfqdn}.cer\n";
 
-print "$dbhost, $dbuser, $dbpassword, $logdb, $serverfqdn, $documentRoot\n";
+//print "$dbhost, $dbuser, $dbpassword, $logdb, $serverfqdn, $documentRoot\n";
