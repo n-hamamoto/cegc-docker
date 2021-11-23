@@ -11,3 +11,4 @@ cp $dst/proxy/conf/etc/httpd/conf.d/proxy.conf             proxy.conf.skel
 cp $dst/proxy/conf/etc/httpd/conf.d/shib.conf              shib.conf.skel
 cp $dst/php/html/conf/config.php             .
 
+mkdir -p cert
