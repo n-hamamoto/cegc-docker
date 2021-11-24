@@ -28,6 +28,9 @@ cp -r ${CONFDIR}/shibboleth/metadata           ${DSTDIR}/etc/shibboleth/
 cp -r ${CONFDIR}/ssl ${DSTDIR}/etc/pki
 cp -r ${CONFDIR}/vhost  ${DSTDIR}/etc/httpd/conf.d/
 
-cp -r ${CONFDIR}/fix-attrs.d  ${DSTDIR}/etc/
 cp -r ${CONFDIR}/services.d   ${DSTDIR}/etc/
+cp -r ${CONFDIR}/fix-attrs.d  ${DSTDIR}/etc/
+
+cp -r ${CONFDIR}/supervisord.d    ${DSTDIR}/etc/
+cp    ${CONFDIR}/supervisord.conf ${DSTDIR}/etc/
 
