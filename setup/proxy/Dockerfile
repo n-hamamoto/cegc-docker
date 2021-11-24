@@ -13,6 +13,10 @@ RUN yum -y install wget && wget 'https://shibboleth.net/cgi-bin/sp_repo.cgi?plat
 RUN cp sp_repo.cgi\?platform=* /etc/yum.repos.d/shibboleth.repo
 RUN dnf -y install shibboleth
 
+EXPOSE 443
+CMD supervisord -c /etc/supervisord.conf
+
+
 #RUN cd /tmp && \
 ##curl -L -O https://github.com/just-containers/s6-overlay/releases/download/v1.19.1.1/s6-overlay-amd64.tar.gz && \
 #    curl -L -O https://github.com/just-containers/s6-overlay/releases/download/v1.21.4.0/s6-overlay-amd64.tar.gz && \
