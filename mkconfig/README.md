@@ -4,7 +4,10 @@
 1. ./import.sh  
 設定変更が必要なファイルをコピーしてきます。
 1. config.phpを編集してください。
-1. ./mkconf.pl  
+```
+$dbhost = 'mysql'; #固定
+```
+3. ./mkconf.pl  
 config.phpを読み込み，サンプル設定ファイルを生成します。
 1. ./certの下に本システムのサーバ証明書を配置してください。
 1. ./deploy.sh  
