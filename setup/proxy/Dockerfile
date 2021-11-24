@@ -34,6 +34,6 @@ RUN dnf -y install shibboleth
 
 #COPY etc /etc/
 
-EXPOSE 443
+#EXPOSE 443
 
-ENTRYPOINT ["/init"]
+#ENTRYPOINT ["/init"]
