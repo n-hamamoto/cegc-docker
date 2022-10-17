@@ -32,6 +32,7 @@ docker-compose up -d
 ```
 ### DBの初期設定
 DBに初期テーブルを設定します。
+ SQLSTATE[HY000] [2002] Connection refusedと出る場合には，mysqlの起動待ちの可能性があるのでしばらくしてから再度実行してください。
 ```
 docker exec -i php bash -c "cd conf && sh ./init.sh"
 ```
