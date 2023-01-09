@@ -11,6 +11,8 @@ Docker及びdocker-composeが利用できるサーバで，以下の手順でイ
 git clone https://github.com/n-hamamoto/cegc-docker.git
 cd cegc-docker/setup
 ./init.sh
+cd ..
+
 ```
 ### 設定ファイルの編集  
 設定ファイルは``cegc-docker``配下の以下のディレクトリに格納されています。詳細な設定を行いたい場合には，各ファイルをご確認いただき，設定してください。
