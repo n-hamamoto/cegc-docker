@@ -62,6 +62,32 @@ docker-compose.ymlを確認いただければわかりますが，ログは以�
 ### proxy/log/shibboleth-www/
  - native.log: conf/etc/shibboleth/native.loggerで設定したログ
  
+## 自動登録について
+定期的に自動登録を行う場合は，cronを設定してください。RHEL系の場合は，以下の通りです。
+
+### /etc/cron.daily/cegc.cron
+
+```
+#!/bin/sh
+
+docker exec -i php bash -c "cd upload && php ./sync-finaltest.php" >> /var/log/cegc.log
+docker exec -i php bash -c "cd upload && php ./sync-tracking.php"  >> /var/log/cegc.log
+```
+作成後`chmod +x /etc/cron.daily/cegc.cron`
+
+### /etc/logrotate.d/cegc.log
+```
+/var/log/cegc.log
+{
+    missingok
+    daily
+    copytruncate
+    compress
+    rotate 90
+    notifempty
+}
+```
+ 
 ### 参考
 1. https://meatwiki.nii.ac.jp/confluence/pages/viewpage.action?pageId=12158187
 
