@@ -33,4 +33,4 @@ git clone https://github.com/n-hamamoto/cegc.git
 
 # copy source to php container volume.
 mkdir -p ../php/html
-cp -r ./cegc/* ../php/html/
+cp -r ./cegc/. ../php/html/
