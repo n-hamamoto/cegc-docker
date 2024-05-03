@@ -61,6 +61,8 @@ services:
 #   - ./proxy/conf/etc/services.d:/etc/services.d:rw
    - ./proxy/conf/etc/supervisord.conf:/etc/supervisord.conf:rw
    - ./proxy/conf/etc/supervisord.d:/etc/supervisord.d:rw
+   - ./proxy/conf/etc/logrotate.conf:/etc/logrotate.conf:rw
+   - ./proxy/conf/etc/logrotate.d:/etc/logrotate.d:rw
    - ./proxy/log/httpd:/var/log/httpd:rw
    - ./proxy/log/shibboleth:/var/log/shibboleth:rw
    - ./proxy/log/shibboleth-www:/var/log/shibboleth-www:rw
