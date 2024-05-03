@@ -61,7 +61,12 @@ docker-compose.ymlを確認いただければわかりますが，ログは以�
  - trancaction.log: 受け渡した属性が出ています。onf/etc/shibboleth/shibd.loggerで設定します。
 ### proxy/log/shibboleth-www/
  - native.log: conf/etc/shibboleth/native.loggerで設定したログ
- 
+
+## logrotate
+logrotateを定期実行するよう設定してください。
+/etc/crontab
+  0  4  *  *  * root       docker exec proxy logrotate -f /etc/logrotate.conf
+  
 ## 自動登録について
 定期的に自動登録を行う場合は，cronを設定してください。RHEL系の場合は，以下の通りです。
 
