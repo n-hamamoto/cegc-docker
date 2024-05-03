@@ -13,6 +13,8 @@ docker cp  ${CNT_NAME}:/etc/httpd/conf.d ${CONF_DIR}/etc/httpd/conf.d
 docker cp  ${CNT_NAME}:/etc/httpd/conf.modules.d ${CONF_DIR}/etc/httpd/conf.modules.d
 
 docker cp  ${CNT_NAME}:/etc/shibboleth ${CONF_DIR}/etc/shibboleth
+docker cp  ${CNT_NAME}:/etc/logrotate.conf ${CONF_DIR}/etc/
+docker cp  ${CNT_NAME}:/etc/logrotate.d ${CONF_DIR}/etc/logrotate.d
 
 docker stop ${CNT_NAME}
 docker rm   ${CNT_NAME}
