@@ -64,9 +64,10 @@ docker-compose.ymlを確認いただければわかりますが，ログは以�
 
 ## logrotate
 logrotateを定期実行するよう設定してください。
+```
 /etc/crontab
   0  4  *  *  * root       docker exec proxy logrotate -f /etc/logrotate.conf
-  
+```
 ## 自動登録について
 定期的に自動登録を行う場合は，cronを設定してください。RHEL系の場合は，以下の通りです。
 
