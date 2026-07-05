@@ -7,7 +7,7 @@ mkdir ../php;   cp php/Dockerfile   ../php
 mkdir ../proxy; cp proxy/Dockerfile ../proxy
 
 # create container images.
-docker-compose build
+docker compose build
 
 # extract config files from containers.
 cd mysql; ./extract-etc.sh; cd ..
