@@ -26,6 +26,11 @@ services:
    driver: syslog
    options:
     tag: "docker/{{.Name}}/{{.ID}}"
+  healthcheck:
+   test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+   interval: 5s
+   timeout: 5s
+   retries: 3
 ############################
  php:
   build: ./php
